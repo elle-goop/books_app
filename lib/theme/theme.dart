@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData AppTheme = ThemeData(
+final ThemeData AppTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.blue,
   primaryColor: Palette.bgYellow,
@@ -9,8 +9,7 @@ ThemeData AppTheme = ThemeData(
   accentColorBrightness: Brightness.light,
   scaffoldBackgroundColor: Palette.bgYellow,
   iconTheme: IconThemeData(
-    // color: Palette.mainBlack,
-    color: Colors.red,
+    color: Palette.mainBlack,
     // size: 19.0,
   ),
   textTheme: TextTheme(
@@ -35,22 +34,8 @@ class Palette {
   static const Color white = Colors.white;
   static const Color whiteTransparent = Color.fromRGBO(255, 255, 255, 0.0);
   static const Color greyTextColor = Color.fromRGBO(79, 86, 93, 1.0);
-  
-  
-  // static const Map<int, Color> yellow = const <int,Color> {
-  //   50: const Color(/* some hex code */),
-  //   100: const Color(/* some hex code */),
-  //   200: const Color(/* some hex code */),
-  //   300: const Color(/* some hex code */),
-  //   400: const Color(/* some hex code */),
-  //   500: const Color(/* some hex code */),
-  //   600: const Color(/* some hex code */),
-  //   700: const Color(/* some hex code */),
-  //   800: const Color(/* some hex code */),
-  //   900: const Color(/* some hex code */),
-  // };
 
-  
+
 }
 
 Widget appBarTitle(BuildContext context, String title) => Container(
@@ -62,7 +47,7 @@ Widget appBarTitle(BuildContext context, String title) => Container(
     decoration: BoxDecoration(
       border: Border(
         bottom: BorderSide(
-          width: 2.0, 
+          width: 2.0,
           color: Palette.yellowLine)),
     ),
     child: Text(
