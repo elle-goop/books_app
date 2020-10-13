@@ -13,11 +13,12 @@ class BookPage extends StatefulWidget {
   BookPage({this.book});
 
   BookPageState createState() => BookPageState(
-    book: book,
-  );
+        book: book,
+      );
 }
 
-class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
+class BookPageState extends State<BookPage>
+    with SingleTickerProviderStateMixin {
   final Book book;
   BookPageState({this.book});
 
@@ -33,25 +34,21 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
   Animation<Offset> bookTitleTransition;
 
   Animation<Offset> animateOffset(
-    {AnimationController controller, 
-    Offset begin: Offset.zero, 
-    Offset end: Offset.zero, 
-    Interval interval}) => Tween<Offset>(
-      begin: begin, end: end)
-      .animate(CurvedAnimation(
+          {AnimationController controller,
+          Offset begin: Offset.zero,
+          Offset end: Offset.zero,
+          Interval interval}) =>
+      Tween<Offset>(begin: begin, end: end).animate(CurvedAnimation(
         curve: interval,
         parent: controller,
       ));
 
   Animation<double> animateOpacity(
-    double begin, 
-    double end, 
-    AnimationController controller, 
-    {Interval interval}) => Tween<double>(
-        begin: begin, end: end)
-        .animate(CurvedAnimation(
-          curve: interval,
-          parent: controller,
+          double begin, double end, AnimationController controller,
+          {Interval interval}) =>
+      Tween<double>(begin: begin, end: end).animate(CurvedAnimation(
+        curve: interval,
+        parent: controller,
       ));
 
   @override
@@ -62,27 +59,24 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
       duration: Duration(milliseconds: 1000),
     );
 
-    bookTitleTransition = Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
-      .animate(CurvedAnimation(
-        curve: Interval(0.0, 0.5, curve: Curves.easeIn),
-        parent: animationController,
-      ));
+    bookTitleTransition =
+        Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
+            .animate(CurvedAnimation(
+      curve: Interval(0.0, 0.5, curve: Curves.easeIn),
+      parent: animationController,
+    ));
 
-    opacityAnimation = Tween(begin: 0.3, end: 1.0)
-      .animate(CurvedAnimation(
-        curve: Interval(0.0, 0.5, curve: Curves.easeIn),
-        parent: animationController,
-      ));
+    opacityAnimation = Tween(begin: 0.3, end: 1.0).animate(CurvedAnimation(
+      curve: Interval(0.0, 0.5, curve: Curves.easeIn),
+      parent: animationController,
+    ));
 
-    sizeAnimation = Tween(begin: 400.0, end: 0.0)
-      .animate(CurvedAnimation(
-        curve: Interval(0.0, 0.5, curve: Curves.fastOutSlowIn),
-        parent: animationController,
-      ));
+    sizeAnimation = Tween(begin: 400.0, end: 0.0).animate(CurvedAnimation(
+      curve: Interval(0.0, 0.5, curve: Curves.fastOutSlowIn),
+      parent: animationController,
+    ));
 
-    // animationController.addListener((){setState((){});});
     animationController.forward();
-    // animationController.repeat();
   }
 
   @override
@@ -102,11 +96,11 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 0,
-        iconTheme: IconThemeData(
-          color: Palette.mainBlack
-        ),
+        iconTheme: IconThemeData(color: Palette.mainBlack),
         centerTitle: true,
-        title: AppBarTitle(title: 'Design Books',),
+        title: AppBarTitle(
+          title: 'Design Books',
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(CustomIcon.search),
@@ -119,7 +113,6 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
         bottom: false,
         child: Stack(
           children: <Widget>[
-
             Column(
               children: <Widget>[
                 ///////////////////////////////////////////////
@@ -136,13 +129,13 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                         size: Size.fromHeight(130.0),
                         child: Row(
                           children: <Widget>[
-
                             Flexible(
                               flex: 1,
                               child: Hero(
                                 tag: 'books_page_${book.imageUrl}',
                                 child: Container(
-                                  child: Image.asset(fullPath, fit: BoxFit.cover),
+                                  child:
+                                      Image.asset(fullPath, fit: BoxFit.cover),
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -155,9 +148,9 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                                 ),
                               ),
                             ),
-
-                            SizedBox(width: 20.0,),
-
+                            SizedBox(
+                              width: 20.0,
+                            ),
                             Flexible(
                               flex: 2,
                               child: FadeTransition(
@@ -166,63 +159,60 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-
                                     SlideTransition(
                                       position: bookTitleTransition,
                                       child: Text(
                                         book.title,
                                         style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
-
                                     SlideTransition(
                                       position: animateOffset(
-                                        controller: animationController,
-                                        begin: Offset(1.0, 0),
-                                        interval: Interval(0.1, 0.6, curve: Curves.easeIn)),
+                                          controller: animationController,
+                                          begin: Offset(1.0, 0),
+                                          interval: Interval(0.1, 0.6,
+                                              curve: Curves.easeIn)),
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 10.0),
-                                        child: Text(
-                                          book.author,
-                                          style: TextStyle(
-                                            color: Palette.yellowGrey,
-                                            fontSize: 14,
-                                          )),
+                                        child: Text(book.author,
+                                            style: TextStyle(
+                                              color: Palette.yellowGrey,
+                                              fontSize: 14,
+                                            )),
                                       ),
                                     ),
-
                                     SlideTransition(
                                       position: animateOffset(
-                                        controller: animationController,
-                                        begin: Offset(1.0, 0),
-                                        interval: Interval(0.3, 0.8, curve: Curves.easeIn)),
+                                          controller: animationController,
+                                          begin: Offset(1.0, 0),
+                                          interval: Interval(0.3, 0.8,
+                                              curve: Curves.easeIn)),
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 10.0),
                                         child: Row(
                                           children: <Widget>[
-
                                             Text(
                                               '\$${book.price}',
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 color: Palette.brown,
                                                 fontWeight: FontWeight.bold,
-                                              ),),
-
-                                            SizedBox(width: 10.0,),
-
-                                            RatingInfo(rating: book.starRating,),
-                                            
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            RatingInfo(
+                                              rating: book.starRating,
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
-
-
                                   ],
                                 ),
                               ),
@@ -233,67 +223,66 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                       ///////////////////////////////////////////////
                       /////////// ** Slide Transition START **
                       ///////////////////////////////////////////////
-                      
-                      SizedBox(height: 25.0,),
+
+                      SizedBox(
+                        height: 25.0,
+                      ),
 
                       ///////////////////////////////////////////////
                       /////////// ** Fade Transition START **
                       ///////////////////////////////////////////////
-                      
+
                       FadeTransition(
-                        opacity: animateOpacity(
-                          0.0, 1.0, 
-                          animationController,
-                          interval: Interval(0.5, 1.0)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-
-                              SizedBox(width: 20.0,),
-
-                              Expanded(
-                                child: Text(
-                                  '${book.pages} pages',
-                                  style: TextStyle(
-                                    color: Palette.yellowGrey,
-                                    fontSize: 14.0,
-                                  ),),
+                        opacity: animateOpacity(0.0, 1.0, animationController,
+                            interval: Interval(0.5, 1.0)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${book.pages} pages',
+                                style: TextStyle(
+                                  color: Palette.yellowGrey,
+                                  fontSize: 14.0,
+                                ),
                               ),
-
-                              Material(
-                                color: Palette.blue,
+                            ),
+                            Material(
+                              color: Palette.blue,
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: InkWell(
+                                onTap: () {},
                                 borderRadius: BorderRadius.circular(20.0),
-                                child: InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
                                           color: Palette.blueShadow,
                                           offset: Offset(0, 7),
-                                          blurRadius: 15.0
-                                        ),
-                                      ],
+                                          blurRadius: 15.0),
+                                    ],
+                                  ),
+                                  padding: EdgeInsets.fromLTRB(27, 8, 27, 13),
+                                  child: Text(
+                                    'BUY IT NOW',
+                                    style: TextStyle(
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Palette.white,
+                                      fontFamily: 'Roboto',
                                     ),
-                                    padding: EdgeInsets.fromLTRB(27, 8, 27, 13),
-                                    child: Text(
-                                      'BUY IT NOW', 
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Palette.white,
-                                        fontFamily: 'Roboto',
-                                      ),),
                                   ),
                                 ),
                               ),
-
-                              SizedBox(width: 2.0,),
-
-                              FavoriteButton(isFavorite: book.isFavorite),
-                              
-                            ],
+                            ),
+                            SizedBox(
+                              width: 2.0,
+                            ),
+                            FavoriteButton(isFavorite: book.isFavorite),
+                          ],
                         ),
                       ),
                       ///////////////////////////////////////////////
@@ -305,7 +294,7 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                 ///////////////////////////////////////////////
                 /////////// ** Books Description END **
                 ///////////////////////////////////////////////
-                
+
                 ///////////////////////////////////////////////
                 /////////// ** Books Scroll Content START **
                 ///////////////////////////////////////////////
@@ -316,17 +305,14 @@ class BookPageState extends State<BookPage> with SingleTickerProviderStateMixin{
                   child: SingleChildScrollView(
                     child: BooksContent(
                         text: text,
-                        opacity: animateOpacity(
-                          0.1, 0.6,
-                          animationController,
-                          interval: Interval(0.0, 0.8, curve: Curves.easeIn))),
+                        opacity: animateOpacity(0.1, 0.6, animationController,
+                            interval:
+                                Interval(0.0, 0.8, curve: Curves.easeIn))),
                   ),
                 ),
               ],
             ),
-
             BottomFade(),
-
           ],
         ),
       ),

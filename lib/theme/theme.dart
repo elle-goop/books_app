@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 
-final ThemeData AppTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.blue,
-  primaryColor: Palette.bgYellow,
-  primaryColorBrightness: Brightness.light,
-  accentColor: Colors.green[500],
-  accentColorBrightness: Brightness.light,
-  scaffoldBackgroundColor: Palette.bgYellow,
-  iconTheme: IconThemeData(
-    color: Palette.mainBlack,
-    // size: 19.0,
-  ),
-  textTheme: TextTheme(
-    body1: TextStyle(),
-    body2: TextStyle(),
-  ),
-);
+final ThemeData appTheme = ThemeData(
+    brightness: Brightness.light,
+    primarySwatch: Colors.blue,
+    primaryColor: Palette.bgYellow,
+    accentColor: Colors.green[500],
+    scaffoldBackgroundColor: Palette.bgYellow,
+    iconTheme: IconThemeData(
+      color: Palette.mainBlack,
+    ));
 
 class Palette {
   static const Color bgYellow = Color.fromARGB(255, 255, 221, 13);
@@ -34,29 +26,4 @@ class Palette {
   static const Color white = Colors.white;
   static const Color whiteTransparent = Color.fromRGBO(255, 255, 255, 0.0);
   static const Color greyTextColor = Color.fromRGBO(79, 86, 93, 1.0);
-
-
 }
-
-Widget appBarTitle(BuildContext context, String title) => Container(
-  child: Container(
-    // color: Colors.green,
-    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-    // height: double.infinity,
-    // padding: EdgeInsets.only(bottom: 5.0),
-    decoration: BoxDecoration(
-      border: Border(
-        bottom: BorderSide(
-          width: 2.0,
-          color: Palette.yellowLine)),
-    ),
-    child: Text(
-        '$title',
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Palette.mainBlack,
-          fontFamily: 'Roboto'
-        ),),
-    ),
-);
-
